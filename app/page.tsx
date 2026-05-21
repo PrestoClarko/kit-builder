@@ -1,4 +1,6 @@
+import { products } from "@/data/products";
 export default function Home() {
+const categories = [...new Set(products.map(p => p.category))];
   return (
     <div className="h-screen flex flex-col">
 
@@ -11,22 +13,36 @@ export default function Home() {
       <div className="flex flex-1">
 
         {/* Left Sidebar */}
-        <div className="w-64 border-r p-4">
-          <p className="font-semibold mb-4">Categories</p>
-          <ul className="space-y-2 text-sm">
-            <li>Hoodies</li>
-            <li>Pants</li>
-            <li>Hats</li>
-            <li>Shoes</li>
-          </ul>
-        </div>
+<div className="w-64 border-r p-4">
+  <p className="font-semibold mb-4">Categories</p>
+
+  <ul className="space-y-2 text-sm">
+    {categories.map((cat) => (
+      <li key={cat} className="capitalize text-gray-700 hover:text-black cursor-pointer">
+        {cat}
+      </li>
+    ))}
+  </ul>
+</div>
 
         {/* Center Preview */}
-        <div className="flex-1 flex items-center justify-center bg-gray-50">
-          <div className="text-gray-400">
-            3D Preview Area (coming soon)
-          </div>
-        </div>
+<div className="flex-1 p-6 bg-gray-50 overflow-auto">
+  <p className="font-semibold mb-4">Products</p>
+
+  <div className="grid grid-cols-2 gap-4">
+    {products.map((product) => (
+      <div
+        key={product.id}
+        className="bg-white p-4 rounded-lg border hover:shadow cursor-pointer"
+      >
+        <p className="font-medium text-sm">{product.name}</p>
+        <p className="text-xs text-gray-500 capitalize">
+          {product.category}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
 
         {/* Right Panel */}
         <div className="w-80 border-l p-4">
