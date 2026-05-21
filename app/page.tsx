@@ -32,15 +32,19 @@ export default function Home() {
       camera.position.set(0, 1.4, 4.2);
 
       function resize() {
+  const canvas = canvasRef.current;
+  if (!canvas) return;
 
-        const parent = canvas.parentElement;
+  const parent = canvas.parentElement;
+  if (!parent) return;
 
-const w = parent ? parent.clientWidth : 800;
-const h = parent ? parent.clientHeight : 600;
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
+  const w = parent.clientWidth;
+  const h = parent.clientHeight;
+
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
 
       window.addEventListener("resize", resize);
       resize();
